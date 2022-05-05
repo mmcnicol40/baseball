@@ -1,0 +1,406 @@
+{
+     "Giants": {
+          "player1": {
+               "Name": "Jay Contact",
+               "Num": "11",
+               "Position": "Shortstop",
+               "Hit_Rating": "Contact",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "2 - double",
+                    "2 - double",
+                    "3 - Triple",
+                    "4 - HR"
+               ]
+          },
+          "player2": {
+               "Name": "Bill Dribbler",
+               "Num": "22",
+               "Position": "2nd Base",
+               "Hit_Rating": "Contact",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "2 - double",
+                    "2 - double",
+                    "3 - Triple",
+                    "4 - HR"
+               ]
+          },
+          "player3": {
+               "Name": "Mo Power",
+               "Num": "28",
+               "Position": "1st Base",
+               "Hit_Rating": "Power",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR"
+               ]
+          },
+          "player4": {
+               "Name": "Bill Bomber",
+               "Num": "44",
+               "Position": "3rd Base",
+               "Hit_Rating": "Power",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR"
+               ]
+          },
+          "player5": {
+               "Name": "Lily Liner",
+               "Num": "08",
+               "Position": "Centerfield",
+               "Hit_Rating": "Contact",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "2 - double",
+                    "2 - double",
+                    "3 - Triple",
+                    "4 - HR"
+               ]
+          },
+          "player6": {
+               "Name": "Mary Masher",
+               "Num": "77",
+               "Position": "DH",
+               "Hit_Rating": "Power",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR"
+               ]
+          },
+          "player7": {
+               "Name": "Hal Hout",
+               "Num": "99",
+               "Position": "Catcher",
+               "Hit_Rating": "Weak",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "0 - pop out",
+                    "0 - ground out",
+                    "3 - triple",
+                    "1 - single"
+               ]
+          },
+          "player8": {
+               "Name": "Don Dinker",
+               "Num": "44",
+               "Position": "Left Field",
+               "Hit_Rating": "Weak",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "0 - pop out",
+                    "0 - ground out",
+                    "3 - triple",
+                    "1 - single"
+               ]
+          },
+          "player9": {
+               "Name": "Betsy Bunt",
+               "Num": "44",
+               "Position": "Right Field",
+               "Hit_Rating": "Weak",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "0 - pop out",
+                    "0 - ground out",
+                    "3 - triple",
+                    "1 - single"
+               ]
+          },
+          "player10": {
+               "Name": "Hal Heater",
+               "Num": "44",
+               "Position": "Pitcher",
+               "Hit_Rating": "Weak",
+               "pitop": [
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - stirke out",
+                    "0 - strike out",
+                    "0 - stirke out",
+                    "0 - line out",
+                    "0 - foul out",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "2 - Double"
+               ]
+          }
+     },
+     "Dodgers": {
+          "player1": {
+               "Name": "Billy Buck",
+               "Num": "11",
+               "Position": "Shortstop",
+               "Hit_Rating": "Contact",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "2 - double",
+                    "2 - double",
+                    "3 - Triple",
+                    "4 - HR"
+               ]
+          },
+          "player2": {
+               "Name": "Dusty B",
+               "Num": "22",
+               "Position": "2nd Base",
+               "Hit_Rating": "Contact",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "2 - double",
+                    "2 - double",
+                    "3 - Triple",
+                    "4 - HR"
+               ]
+          },
+          "player3": {
+               "Name": "Billy Russ",
+               "Num": "28",
+               "Position": "1st Base",
+               "Hit_Rating": "Power",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR"
+               ]
+          },
+          "player4": {
+               "Name": "Ron Cey",
+               "Num": "44",
+               "Position": "3rd Base",
+               "Hit_Rating": "Power",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR"
+               ]
+          },
+          "player5": {
+               "Name": "Don Ford",
+               "Num": "08",
+               "Position": "Centerfield",
+               "Hit_Rating": "Contact",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "2 - double",
+                    "2 - double",
+                    "3 - Triple",
+                    "4 - HR"
+               ]
+          },
+          "player6": {
+               "Name": "Gibby",
+               "Num": "77",
+               "Position": "DH",
+               "Hit_Rating": "Power",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR",
+                    "4 - HR"
+               ]
+          },
+          "player7": {
+               "Name": "M Scoscia",
+               "Num": "99",
+               "Position": "Catcher",
+               "Hit_Rating": "Weak",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "0 - pop out",
+                    "0 - ground out",
+                    "3 - triple",
+                    "1 - single"
+               ]
+          },
+          "player8": {
+               "Name": "M Kemp",
+               "Num": "44",
+               "Position": "Left Field",
+               "Hit_Rating": "Weak",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "0 - pop out",
+                    "0 - ground out",
+                    "3 - triple",
+                    "1 - single"
+               ]
+          },
+          "player9": {
+               "Name": "Piazza",
+               "Num": "44",
+               "Position": "Right Field",
+               "Hit_Rating": "Weak",
+               "hitop": [
+                    "0 - line out",
+                    "0 - ground out",
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - strike out",
+                    "1 - single",
+                    "2 - double",
+                    "0 - pop out",
+                    "0 - ground out",
+                    "3 - triple",
+                    "1 - single"
+               ]
+          },
+          "player10": {
+               "Name": "Fernando",
+               "Num": "44",
+               "Position": "Pitcher",
+               "Hit_Rating": "Weak",
+               "pitop": [
+                    "0 - strike out",
+                    "0 - pop out",
+                    "0 - strike out",
+                    "0 - stirke out",
+                    "0 - strike out",
+                    "0 - stirke out",
+                    "0 - line out",
+                    "0 - foul out",
+                    "1 - single",
+                    "1 - single",
+                    "1 - single",
+                    "2 - Double"
+               ]
+          }
+     }
+}

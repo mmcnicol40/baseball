@@ -1,49 +1,63 @@
-console.log(" HW 4 ex 5 - Count the vowels");
-let myCnt = 0;
-let newWord = prompt("Enter a word");
+console.log("jared solution");
 
-const len = newWord.length;
-const originalWord = newWord;
+function getData() {
+  fetch('../test2.json')
+      .then(results => results.json())
+      .then(data => console.log(data.Giants.player2.hitop));
+  return data.Giants.player2.hitop;
+}
 
-//eliminate case sensitivity
-let lowercaseWord = originalWord.toLowerCase();
-let uppercaseWord = originalWord.toUpperCase();
+function doSomethingWithIt(players, username) {
+  console.log("here we are")
+  console.log(players)
+  console.log(username)
+}
 
-const tmpName = newWord;
-let myWordlist = [];
-let myVowllist = [];
-let bkWordlist = [];
 
-//capturing only the vowels from the original word
-for (let i = 0; i < lowercaseWord.length; i++) {
-  if (
-    lowercaseWord[i] === "a" ||
-    lowercaseWord[i] === "e" ||
-    lowercaseWord[i] === "i" ||
-    lowercaseWord[i] === "o" ||
-    lowercaseWord[i] === "u" ||
-    lowercaseWord[i] === "y"
-  ) {
-    myVowllist.push(lowercaseWord[i]);
+function getDataJared(username) {
+  console.log(username)
+  fetch('../test2.json')
+      .then(results => results.json())
+      .then(data => doSomethingWithIt(data.Giants,username));
+  //return data.Giants.player2.hitop;
+}
+
+function getData3() {
+  var afterPromise = "";
+  var test = fetch('test2.json')
+      .then(results => results.json())
+      .then(data => data.Giants)
+  return test;
+}
+
+async function getData4() {
+  var test = await fetch('test2.json')
+      .then(results => results.json())
+      .then(data => { return data.Giants })
+      .then(function (result) { console.log(result); return result;})
+}
+
+async function getAllPlayers() {
+  try {
+      // GET a list of player IDs 
+      var thePlayers = await superagent.getData4()
+      // wait for 3 seconds (just for the sake of this example)
+      await delay();
+      // GET information about each book
+      return superagent.getData4()
+  } catch (error) {
+      // If any of the awaited promises was rejected, this catch block
+      // would catch the rejection reason
+      return null;
   }
-  myWordlist.push(lowercaseWord[i]);
 }
 
-//reverse engineering the original word - creating backwards spelling for comparison
-for (let i = lowercaseWord.length - 1; i >= 0; i--) {
-  {
-    bkWordlist.push(lowercaseWord[i]);
-  }
-}
 
-//determining if this is a palindrome by comparing original word (in an array) to backwards word (in an array)
-let isPalin = myWordlist.toString() === bkWordlist.toString();
-let palintxt = "";
-if (isPalin === false) {
-  palintxt = "not";
-}
-
-//printing out required message
-console.log(
-  `"${newWord}" contains ${myVowllist.length} vowel(s) and is ${palintxt} a palindrome.`
-);
+//listening for click then call "getData"
+button.addEventListener("click", function () {
+let username = textbox.value;
+  const myArray = getDataJared(username);
+  result = getDataJared(username);
+  //console.log("myArray", myArray);
+  //console.log("result", result);
+});

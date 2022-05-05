@@ -6,10 +6,17 @@ let firstbase = 0;
 let secondbase = 0;
 let thirdbase = 0;
 let inningout = 0;
+let arrayScorecard =[];
+let inning=0;
+let hits=0;
+let errors=0;
+let runs=0;
 function calcAvg(ab, hits) {
   const gameAvg = hits / ab;
   return gameAvg;
 }
+
+const inningdesc = ["", "first","first", "second","second","third","third","forth","forth","fifth","fifth","sixth","sixth","seventh","seventh","eighth","eighth","ninth","ninth","Final Score"];
 
 console.log(calcAvg(4, 2));
 console.log(calcAvg(5, 2));
@@ -35,6 +42,7 @@ const batCard = {
   player: "Mitch",
   hitAvg: 0.333,
 
+  // at bat results based on dice role
   abResult: function () {
     let i = (Math.floor(Math.random() * 6.5)) + (Math.floor(Math.random() * 6.5));  // 6.5 represents the 2 dice rolled
     const hitopt = [
@@ -79,29 +87,14 @@ const batCard = {
       resultcard = "pitcher";
     }
     console.log("dice roll #2", k)
-
-    //initial tracking of runners on base
-
-
-
-    // console.log(k, result, resultcard);
-
-
-
     return result;
   }
 };
-//console.log(batCard.player, batCard.hitAvg, batCard.abResult());
 
+//const abresult = document.getElementById("abresults");
+//abresult.innerHTML = `"test"`;
 
-// write contents to screen per spec
-//const newtpic = document.getElementById("persPic");
-//newtpic.innerHTML = `<img src="${user.avatar_url} " width="150" alt="W3Schools.com"></img>`;
-const abresult = document.getElementById("abresults");
-abresult.innerHTML = `"test"`;
-// message.appendChild("");  //i was trying to use this line to write to the screen but was getting an error - and yet everything wrote to screen w.o it. not sure why
-
-//initialize varaibles
+//initialize variables
 let messages = document.getElementById("messages");
 let messages2 = document.getElementById("messages2");
 let messages3 = document.getElementById("messages3");
@@ -118,26 +111,26 @@ button.addEventListener("click", function () {
 });
 */
 
-//press return
+//writing actions to screen
 document.addEventListener("keyup", function (event) {
   if (event.code === "Enter") {
     const newMessage = document.createElement("li");
-    //newMessage.innerHTML = textbox.value;
     const ab_result = batCard.abResult();
     newMessage.innerHTML = `${ab_result},${batCard.player} "#1"`;
     messages.appendChild(newMessage);
 
     const newMessage2 = document.createElement("li");
-    const runresult = ab_result.substring(0, 1);
+    const runresult = ab_result.substring(0,1);
     const bases2 = bases(runresult);
     newMessage2.innerHTML = `${bases2}`;
     messages2.appendChild(newMessage2);
 
+    /*
     const newMessage3 = document.createElement("li");
-    const innresult = ab_result.substring(0, 1);
-    const inning = 1;
-    newMessage3.innerHTML = `${inning}`;
+    const innstats = scorecard(1,0,2,0);  //inning, runs, hits, errors
+    newMessage3.innerHTML = `${innstats}`;
     messages3.appendChild(newMessage3);
+    */
 
     //type clear - clears messages
     if (textbox.value === "clear") {
@@ -159,28 +152,31 @@ document.addEventListener("keyup", function (event) {
 
 //tracking runners
 function bases(bases) {
-  //console.log("bases", bases);
-
   let bill = "zero";
   let singstat = "";
 
   // console.log("bases", bases);
   switch (bases) {
     case "4":
-      thirdbase = 0;
+    runs = thirdbase + secondbase + firstbase + 1;  
+     thirdbase = 0;
       secondbase = 0;
       firstbase = 0;
       console.log(`'Homerun' bases are clear ${firstbase} ${secondbase} ${thirdbase}`);
       bill = "cleared the bases";
+      hits = ++hits;
       break;
     case "3":
+      runs = thirdbase + secondbase + firstbase;  
       thirdbase = 1;
       secondbase = 0;
       firstbase = 0;
       console.log(`'triple' 3rd base only ${firstbase} ${secondbase} ${thirdbase}`);
       bill = "runner on third";
+      hits = ++hits;
       break;
     case "2":
+      runs = thirdbase + secondbase;  
       thirdbase = firstbase;
       let thirdstat = "";
       if (thirdbase === 1) {
@@ -190,8 +186,10 @@ function bases(bases) {
       firstbase = 0;
       console.log(`'double'  ${firstbase} ${secondbase} ${thirdbase}`);
       bill = `runner on second ${thirdstat}`;
+      hits = ++hits;
       break;
     case "1":
+      runs = thirdbase;  
       thirdbase = secondbase;
       secondbase = firstbase;
       firstbase = 1;
@@ -204,6 +202,7 @@ function bases(bases) {
       };
       console.log(`'single' ${firstbase} ${secondbase} ${thirdbase},${singstat}`);
       bill = `${singstat}`;
+      hits = ++hits;
       break;
     case "0":
       if (inningout === 2) {
@@ -212,6 +211,17 @@ function bases(bases) {
         secondbase = 0;
         thirdbase = 0;
         inningout = 0;
+        
+
+        const newMessage3 = document.createElement("li");
+        const innstats = scorecard(0,runs,hits,0);  //inning, runs, hits, errors
+        newMessage3.innerHTML = `${innstats}`;
+        messages3.appendChild(newMessage3);
+        hits = 0;
+        runs = 0;
+
+
+
       } else {
         inningout = ++inningout;
         singstat = `out # ${inningout}`;
@@ -226,3 +236,32 @@ function bases(bases) {
   };
   return (bill);
 }
+
+
+//updating the scorecard
+function scorecard(inn,runs,hits,errors) {
+  console.log("scorecard",inn,runs,hits,errors);
+
+if (inning<19) { 
+   arrayScorecard.push(inning);
+    inning = ++inning;
+} else {
+  inning = 0;
+}
+console.log(arrayScorecard);
+//console.log(`${inningdesc} ${inningdesc[inning]}`);
+
+let blah2 = "test"
+if(inning % 2 === 0) {
+   blah2 = "Bottom of";
+} else {
+   blah2 = "Top of";
+};
+
+const blah = `${blah2} ${inningdesc[inning]}  ${runs} runs    ${hits} hits     ${errors} errors `;
+
+  return (blah);
+}
+
+
+

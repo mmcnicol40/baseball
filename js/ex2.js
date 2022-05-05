@@ -5,17 +5,18 @@ let firstbase = 0;
 let secondbase = 0;
 let thirdbase = 0;
 let inningout = 0;
-let arrayScorecard =[];
-let inning=0;
-let hits=0;
-let errors=0;
-let runs=0;
+let arrayScorecard = [];
+let inning = 0;
+let hits = 0;
+let errors = 0;
+let runs = 0;
+let dBases = " ";
 function calcAvg(ab, hits) {
   const gameAvg = hits / ab;
   return gameAvg;
 }
 
-const inningdesc = ["", "first","first", "second","second","third","third","forth","forth","fifth","fifth","sixth","sixth","seventh","seventh","eighth","eighth","ninth","ninth","Final Score"];
+const inningdesc = ["", "first", "first", "second", "second", "third", "third", "forth", "forth", "fifth", "fifth", "sixth", "sixth", "seventh", "seventh", "eighth", "eighth", "ninth", "ninth", "Final Score"];
 
 console.log(calcAvg(4, 2));
 console.log(calcAvg(5, 2));
@@ -73,7 +74,7 @@ const batCard = {
       "2 - Double9",
     ];
     console.log("dice roll", i)
-    //return pitopt[i];
+
 
     let k = Math.floor(Math.random() * 2);  //chooses whose card to use (Pitcher or Batter)
     let result = 0;
@@ -119,19 +120,12 @@ document.addEventListener("keyup", function (event) {
     messages.appendChild(newMessage);
 
     const newMessage2 = document.createElement("li");
-    const runresult = ab_result.substring(0,1);
-    const bases2 = bases(runresult);
+    const runresult = ab_result.substring(0, 1);
+    const bases2 = calcBases(runresult);
     newMessage2.innerHTML = `${bases2}`;
     messages2.appendChild(newMessage2);
 
-    /*
-    const newMessage3 = document.createElement("li");
-    const innstats = scorecard(1,0,2,0);  //inning, runs, hits, errors
-    newMessage3.innerHTML = `${innstats}`;
-    messages3.appendChild(newMessage3);
-    */
-
-    //type clear - clears messages
+     //type clear - clears messages
     if (textbox.value === "clear") {
       const newTbox = document.getElementById("messages");
       newTbox.innerHTML = "";
@@ -150,32 +144,34 @@ document.addEventListener("keyup", function (event) {
 
 
 //tracking runners
-function bases(bases) {
+function calcBases(bases) {
   let bill = "zero";
   let singstat = "";
 
   // console.log("bases", bases);
   switch (bases) {
     case "4":
-    runs = thirdbase + secondbase + firstbase + 1;  
-     thirdbase = 0;
+      runs = thirdbase + secondbase + firstbase + 1;
+      thirdbase = 0;
       secondbase = 0;
       firstbase = 0;
       console.log(`'Homerun' bases are clear ${firstbase} ${secondbase} ${thirdbase}`);
       bill = "cleared the bases";
       hits = ++hits;
+      dBases = '000'; //HR - empty bases;
       break;
     case "3":
-      runs = thirdbase + secondbase + firstbase;  
+      runs = thirdbase + secondbase + firstbase;
       thirdbase = 1;
       secondbase = 0;
       firstbase = 0;
       console.log(`'triple' 3rd base only ${firstbase} ${secondbase} ${thirdbase}`);
       bill = "runner on third";
       hits = ++hits;
+      dBases = '001'; //triple - runner on third
       break;
     case "2":
-      runs = thirdbase + secondbase;  
+      runs = thirdbase + secondbase;
       thirdbase = firstbase;
       let thirdstat = "";
       if (thirdbase === 1) {
@@ -186,9 +182,14 @@ function bases(bases) {
       console.log(`'double'  ${firstbase} ${secondbase} ${thirdbase}`);
       bill = `runner on second ${thirdstat}`;
       hits = ++hits;
+      if (secondbase + thirdbase === 2) {
+        dBases = '011'; //second and 3rd base
+      } else {
+        dBases = '010'; //second only
+      }
       break;
     case "1":
-      runs = thirdbase;  
+      runs = thirdbase;
       thirdbase = secondbase;
       secondbase = firstbase;
       firstbase = 1;
@@ -202,6 +203,18 @@ function bases(bases) {
       console.log(`'single' ${firstbase} ${secondbase} ${thirdbase},${singstat}`);
       bill = `${singstat}`;
       hits = ++hits;
+      if (firstbase + secondbase + thirdbase === 3) {
+        dBases = '111'; //basesloaded
+      } else {
+        if (firstbase + secondbase === 2)
+          dBases = '110'; //first and second only
+        else {
+          dBases = "101"
+        }
+      }
+      if (firstbase + secondbase + thirdbase === 1) {
+        dBases = '100';
+      }
       break;
     case "0":
       if (inningout === 2) {
@@ -210,57 +223,148 @@ function bases(bases) {
         secondbase = 0;
         thirdbase = 0;
         inningout = 0;
-        
+
 
         const newMessage3 = document.createElement("li");
-        const innstats = scorecard(0,runs,hits,0);  //inning, runs, hits, errors
+        const innstats = scorecard(0, runs, hits, 0);  //inning, runs, hits, errors
         newMessage3.innerHTML = `${innstats}`;
         messages3.appendChild(newMessage3);
         hits = 0;
         runs = 0;
 
 
-
+        dBases = '000'
       } else {
         inningout = ++inningout;
         singstat = `out # ${inningout}`;
       };
       console.log(`'out' ${firstbase} ${secondbase} ${thirdbase},${singstat}`);
       bill = `${singstat}`;
-     // bill = "out. no change on bases";
+      // bill = "out. no change on bases";
       break;
     default:
       console.log(`Sorry, something went wrong.`);
 
   };
+
+  drawBases(dBases);
+
   return (bill);
 }
 
-
 //updating the scorecard
-function scorecard(inn,runs,hits,errors) {
-  console.log("scorecard",inn,runs,hits,errors);
+function scorecard(inn, runs, hits, errors) {
+  console.log("scorecard", inn, runs, hits, errors);
 
-if (inning<19) { 
-   arrayScorecard.push(inning);
+  if (inning < 19) {
+    arrayScorecard.push(inning);
     inning = ++inning;
-} else {
-  inning = 0;
-}
-console.log(arrayScorecard);
-//console.log(`${inningdesc} ${inningdesc[inning]}`);
+  } else {
+    inning = 0;
+  }
+  console.log(arrayScorecard);
+  //console.log(`${inningdesc} ${inningdesc[inning]}`);
 
-let blah2 = "test"
-if(inning % 2 === 0) {
-   blah2 = "Bottom of";
-} else {
-   blah2 = "Top of";
-};
+  let blah2 = "test"
+  if (inning % 2 === 0) {
+    blah2 = "Bottom of";
+  } else {
+    blah2 = "Top of";
+  };
 
-const blah = `${blah2} ${inningdesc[inning]}  ${runs} runs    ${hits} hits     ${errors} errors `;
+  const blah = `${blah2} ${inningdesc[inning]}  ${runs} runs    ${hits} hits     ${errors} errors `;
 
   return (blah);
 }
 
 
 
+//writing actions to screen
+document.addEventListener("keypress", function (event) {
+
+  if (Number(textbox.value) >= 0) {
+
+    drawBases(textbox.value);
+
+  }
+});
+
+
+//drawing bases
+function drawBases(bases) {
+  let messages = document.getElementById("myVideo");
+  const newMessage = document.createElement("div");
+  const element = document.getElementById("diamond");
+  switch (bases) {
+    case "000": // empty bases
+      element.remove();
+
+      newMessage.id = "diamond";
+      newMessage.innerHTML = ' <br> <img src="../images/bases0.jpg"  >';
+      messages.appendChild(newMessage);
+      break;
+
+    case "100": // 1st base only
+      element.remove();
+
+      newMessage.id = "diamond";
+      newMessage.innerHTML = '<video id="messages" width= "320" height="200";  autoplay> <source src="../images/0_single.mp4" type="video/mp4" /> </video>';
+      messages.appendChild(newMessage);
+      break;
+
+    case "110": // 1st and 2nd base
+      element.remove();
+
+      newMessage.id = "diamond";
+      newMessage.innerHTML = '<video id="messages" width= "320" height="240";  autoplay> <source src="../images/1_single.mp4" type="video/mp4" /> </video>';
+      messages.appendChild(newMessage);
+
+      break;
+    case "111": // bases loaded
+      element.remove();
+
+      newMessage.id = "diamond";
+      newMessage.innerHTML = ' <br> <img src="../images/bases111.jpg"  >';
+      messages.appendChild(newMessage);
+
+      break;
+
+    case "011": // 2nd and 3rd
+      element.remove();
+
+      newMessage.id = "diamond";
+      newMessage.innerHTML = ' <br> <img src="../images/bases011.jpg"  >';
+      messages.appendChild(newMessage);
+
+      break;
+
+    case "010": // 2nd only
+      element.remove();
+
+      newMessage.id = "diamond";
+      newMessage.innerHTML = ' <br> <img src="../images/bases010.jpg"  >';
+      messages.appendChild(newMessage);
+
+      break;
+
+    case "001": // 3rd only
+      element.remove();
+
+      newMessage.id = "diamond";
+      newMessage.innerHTML = ' <br> <img src="../images/bases001.jpg"  >';
+      messages.appendChild(newMessage);
+
+      break;
+
+    case "101": // 1st and 3rd
+      element.remove();
+
+      newMessage.id = "diamond";
+      newMessage.innerHTML = ' <br> <img src="../images/bases101.jpg"  >';
+      messages.appendChild(newMessage);
+
+      break;
+    default:
+
+  }
+}

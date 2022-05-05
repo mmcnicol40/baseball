@@ -1,3 +1,4 @@
+
 h1,h2 {
     font-family: 'Courier New';
     color: red;
@@ -84,8 +85,8 @@ hr {
   }
 /* image style attributes */
   img {
-    border-radius: 33%;
-    width: 300px;
+
+    width: 320px;
     
   }
 

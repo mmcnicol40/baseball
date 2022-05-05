@@ -1,0 +1,13 @@
+ {
+    "Giants": [   [ { "Name": "Jay Contact" }, { "Num": "11" }, {"hitop": ["01", "02", "03"] }],
+                  [ { "Name": "jim Contact" }, { "Num": "131" }, {"hitop": ["01", "02", "03"] }],
+                  [ { "Name": "Jill Contact" }, { "Num": "131" }, {"hitop": ["01", "02", "03"] }]
+    ],
+    "Dodgers": [   [ { "Name": "tommy Contact" }, { "Num": "11" }, {"hitop": ["01", "02", "03"] }],
+    [ { "Name": "billy" }, { "Num": "131" }, {"hitop": ["01", "02", "03"] }],
+    [ { "Name": "saxy" }, { "Num": "131" }, {"hitop": ["01", "02", "03"] }]
+  ]
+  }
+  
+
+
