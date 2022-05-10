@@ -1,3 +1,43 @@
+#scrollbox {
+  box-sizing: border-box;
+  overflow: scroll;
+  width: 350px;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.scrollbox {
+  box-sizing: border-box;
+  overflow: scroll;
+  width: 350px;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+
+.messages {
+  overflow: scroll;
+  width: 600px;
+  height: 100px;
+}
+
+.myField {
+  position: relative;
+  text-align: left;
+  color: white;
+}
+.circle {
+  position: absolute;
+  font-style: bold;
+  font-size: xx-large;
+  color: red;
+  font-weight: 900;
+  top: 14.5%;
+  left: 70%;
+}
+
+
 .container {
   position: absolute;
   text-align: left;
@@ -8,44 +48,171 @@
   left: 10%;
   transform: translate(-5%, -25%);
 }
+
+.container2 {
+  position: absolute;
+  font-style: bold;
+  font-size: xx-large;
+  color: green;
+  font-weight: 900;
+  top: 5%;
+  left: 48%;
+}
+
+.matchup {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: white;
+  font-weight: 900;
+  top: 50%;
+  right: 10%;
+}
+
 .top-left {
-position: absolute;
-font-style: bold;
-font-size: xx-large;
-color: red;
-font-weight: 900;
-  top: 195px;
-  left: 923px;
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: white;
+  font-weight: 900;
+  top: 9%;
+  left: 55%;
 }
 
 .bottom-left {
   position: absolute;
   font-style: bold;
-font-size: xx-large;
-color: blue;
-font-weight: 900;
+  font-size: xx-large;
+  color: blue;
+  font-weight: 900;
   top: 240px;
   left: 923px;
 }
 
-
-
 .top-right {
   position: absolute;
   font-style: bold;
-font-size: xx-large;
-color: green;
-font-weight: 900;
-  top: 195px;
-  left: 1340px;
+  font-size: large;
+  color: white;
+  font-weight: 900;
+  top: 9%;
+  left: 70%;
 }
 
 .bottom-right {
   position: absolute;
   font-style: bold;
-font-size: xx-large;
-color: purple;
-font-weight: 900;
-  top: 240px;
-  left: 1340px;
+  font-size: large;
+  color: white;
+  font-weight: 900;
+  top: 11%;
+  left: 70%;
+}
+
+* {
+  box-sizing: border-box;
+
+}
+.visbat {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: blue;
+  font-weight: 900;
+  width: 10%;
+  top: 25%;
+  left: 45%;
+}
+
+.vistext {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: blue;
+  font-weight: 900;
+  width: 20%;
+  top: 25%;
+  left: 55%;
+}
+.vistext2 {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: blue;
+  font-weight: 900;
+  width: 20%;
+  top: 28.5%;
+  left: 55%;
+}
+.vistext3 {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: blue;
+  font-weight: 900;
+  width: 20%;
+  top: 32%;
+  left: 55%;
+}
+.hombat {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: white;
+  font-weight: 900;
+  width: 100%;
+  top: 40%;
+  left: 45%;
+}
+.homtext {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: blue;
+  font-weight: 900;
+  width: 20%;
+  top: 42%;
+  left: 55%;
+}
+.homtext2 {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: blue;
+  font-weight: 900;
+  width: 20%;
+  top: 44%;
+  left: 55%;
+}
+.homtext3 {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: blue;
+  font-weight: 900;
+  width: 20%;
+  top: 46%;
+  left: 55%;
+}
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 300px;
+}
+/* Create three equal columns that floats next to each other */
+.column2 {
+  content: "";
+  display: table;
+  clear: both;
+   float: left;
+  width: 50%
+ }
+
+/* Clear floats after the columns  */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

@@ -1,0 +1,52 @@
+#scrollbox {
+  box-sizing: border-box;
+  overflow: scroll;
+  width: 350px;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.messages {
+  overflow: scroll;
+  width: 600px;
+  height: 100px;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 300px;
+}
+/* Create three equal columns that floats next to each other */
+.column2 {
+  content: "";
+  display: table;
+  clear: both;
+   float: left;
+  width: 50%
+ }
+
+/* Clear floats after the columns  */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.matchtxt {
+  line-height: 35px;
+  padding-left: 10%;
+  font-size: larger;
+
+}
+.matchimg {
+  line-height:30px;;
+}
+
+
+button {
+  width: 80px;
+  height: 40px;
+}

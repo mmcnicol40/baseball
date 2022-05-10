@@ -98,7 +98,6 @@ console.log(visSumErrs);
 console.log(scoreboard[0].runs);
 console.log(scoreboard[1].runs);
 
-//removes old visitor
 
 //using "Write" and manual method - found a number of versions similar to this on the internet... I absolutely can follow the logic... but not my strength figure out how to translate
 let rows = 2;

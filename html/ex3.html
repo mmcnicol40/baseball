@@ -6,49 +6,38 @@
     <title>Mitch's Ex 2</title>
     <link rel="stylesheet" href="../css/styles.css">
 
-        <style>
-        * {
-          box-sizing: border-box;
-        }
-        
-        /* Create two equal columns that floats next to each other */
-        .column {
-          float: left;
-          width: 33%;
-          padding: 10px;
-          height: 300px; /* Should be removed. Only for demonstration */
-        }
-        
-        /* Clear floats after the columns */
-        .row:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
-        </style>
-        </head>
-
-
-
-
-
 </head>
 <body>
-    <h1><a href="../index.html">Click on link to return to Start Page</a></h1>
-    <h2>Mitch's Baseball Calc Checks</h2>
+  <div class="container2" id="container">
+    <img src="../images/fenway5.jpg" style="width:51%;">
 
-
-
-    <p class = "msg"> type the word "clear" to CLEAR ALL MESSAGE BOXES </p>
-    
-    <button id="button">Send</button> 
-        <input id="textbox" type="text" >
-
+    <div  id="visInn"></div>
+    <div  id="hInn" > </div>
+    <div  id="divInn3" > </div>
+    <div  id="hdivInn3" > </div>
+    <div id="showOuts" class="circle"> 
   
-    <p id="persPic"></p>
-    <p id="abresults"> </p> 
+    </div>
+  </div>
+
+    <h1><a href="../index.html">Click on link to return to Start Page</a></h1>
+
+    <h2>Mitch's Baseball Calc Checks</h2>
+    <p class = "msg"> press ENTER ----- type "clear" to clear boxes </p>
+
+    <button id="button1">Pitch</button>
+    <button id="button2">Sim</button>
 
 
+    <p id="abresults2r"></p>
+
+  <div id="myField" class="myField" >
+  <div class=field id="diamond">
+    <BR>
+  <img src="../images/bases000.jpg" width="75%"  >
+  </div>
+ 
+</div>
 
         
         <h2>Testing logic and math of main game</h2>
@@ -66,7 +55,7 @@
           </div>
 
           <div class="column" style="background-color:goldenrod;">
-            <h2>innings / score (in progress)</h2>
+            <h2>scorecard </h2>
             <ul id="messages3"></ul>
           </div>
 
@@ -76,15 +65,6 @@
         </body>
 
 
-
-
-
-
-    
-
-
-
-
-    <script src="../js/ex2.js"></script>
+    <script src="../js/ex3.js"></script>
 </body>
 </html>

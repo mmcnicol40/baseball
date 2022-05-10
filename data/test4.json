@@ -301,21 +301,12 @@
       }
     ]
   ],
-  "Dodgers": [
-    [
-      {
-        "Name": "Billy Buck"
-      },
-      {
-        "Num": "11"
-      },
-      {
-        "Position": "Shortstop"
-      },
-      {
-        "Hit_Rating": "Contact"
-      },
-      {
+  "Dodgers": {
+      "Logo": "path",
+      "Billy Buck": {
+        "Num": "11",
+        "Position": "Shortstop",
+        "Hit_Rating": "Contact",
         "hitop": [
           "4 - HR",
           "0 - ground out",
@@ -330,23 +321,12 @@
           "3 - Triple",
           "0 - line out"
         ]
-      }
-    ],
-    [
-      {
-        "Name": "Dusty B"
       },
-      {
-        "Num": "22"
-      },
-      {
-        "Position": "2nd Base"
-      },
-      {
-        "Hit_Rating": "Contact"
-      },
-      {
-        "hitop": [
+        "Dusty Baker": {
+            "Num": "22",
+            "Position": "2nd Base",
+            "Hit_Rating": "Contact",
+            "hitop": [
           "0 - line out",
           "0 - ground out",
           "0 - strike out",
@@ -360,9 +340,7 @@
           "3 - Triple",
           "4 - HR"
         ]
-      }
-    ],
-    [
+      },
       {
         "Name": "Billy Russ"
       },

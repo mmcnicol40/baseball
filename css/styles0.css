@@ -1,0 +1,145 @@
+#scrollbox {
+  box-sizing: border-box;
+  overflow: scroll;
+  width: 470px;
+  height: 350px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.messages {
+  overflow: scroll;
+  width: 600px;
+  height: 100px;
+}
+
+.myField {
+  position: relative;
+  text-align: left;
+  color: white;
+}
+.field {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.circle {
+  position: absolute;
+  font-style: bold;
+  font-size: 60px;
+  color: red;
+  font-weight: 1200;
+  top: 210px;
+  left: 1400px;
+}
+
+
+.container {
+  position: absolute;
+  text-align: left;
+  color: white;
+  top: 0px;
+  left: 0px;
+  top: 27%;
+  left: 10%;
+  transform: translate(-5%, -25%);
+}
+
+.container2 {
+  position: absolute;
+  font-style: bold;
+  font-size: xx-large;
+  color: green;
+  font-weight: 900;
+  top: 5%;
+  left: 48%;
+}
+
+.matchup {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: white;
+  font-weight: 900;
+  top: 50%;
+  right: 10%;
+}
+
+.top-left {
+  position: absolute;
+  font-style: bold;
+  font-size: large;
+  color: white;
+  font-weight: 900;
+  top: 9%;
+  left: 55%;
+}
+
+.bottom-left {
+  position: absolute;
+  font-style: bold;
+  font-size: xx-large;
+  color: blue;
+  font-weight: 900;
+  top: 240px;
+  left: 923px;
+}
+
+.v_rhe {
+  position: absolute;
+  font-style: bold;
+  font-size: 22px;
+  color: white;
+  font-weight: 900;
+  top: 137px;
+  left: 1420px;
+}
+
+.bottom-right {
+  position: absolute;
+  font-style: bold;
+  font-size: 22px;
+  color: white;
+  font-weight: 900;
+  top: 172px;
+  left: 1420px;
+}
+
+* {
+  box-sizing: border-box;
+}
+ 
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.3%;
+  padding: 10px;
+  height: 500px;
+}
+ 
+/* Clear floats after the columns  */
+.row{
+  width: 1500px;
+  font-size: x-large;
+  color: black;
+  line-height: normal;
+  background-color: aqua;
+  height: 500px;
+}
+
+
+.matchtxt {
+  line-height: 35px;
+  padding-left: 10%;
+  font-size: larger;
+
+}
+.matchimg {
+  line-height:30px;;
+}
+
+
+button {
+  width: 80px;
+  height: 40px;
+}

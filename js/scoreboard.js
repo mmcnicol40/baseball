@@ -99,7 +99,16 @@ console.log(visSumErrs);
 let rows = 2;
 let columns = scoreboard[0].hits.length;
 
+//write to a scroll box
+function addElement() {
+  var scrollbox = document.getElementById('scrollbox');
 
+  // Create some element, e.g. div
+  var newElement = document.createElement('div');
+  newElement.setAttribute('id', "some-id-for-new-element");
+  newElement.innerHTML = 'New element has been added!';
+  scrollbox.appendChild(newElement);
+}
 
 
 
@@ -119,6 +128,9 @@ document.addEventListener("keypress", function (event) {
 });
 */
 
+
+/*
+//commented out so i can try out scroll box
   let messages = document.getElementById("container");
   const newMessage = document.createElement("Vinn");
   const element = document.getElementById("divInn2");
@@ -128,7 +140,7 @@ document.addEventListener("keypress", function (event) {
       newMessage.innerHTML = '  <div class="top-left">0 &nbsp;   0   &nbsp; 0   &nbsp; &nbsp; 1  &nbsp; 0  &nbsp; 0  &nbsp;   1  &nbsp; 0  &nbsp; 0</div>';
       messages.appendChild(newMessage);
 
-
+*/
    
 
 
