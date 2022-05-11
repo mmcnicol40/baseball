@@ -1,7 +1,27 @@
 
 console.log(" functions & baseball - dice probability (ex0)");
+// array for scoreboard tracking and drawing
+const scoreByinn = {
+  "visitors": [
+    {
+      "Runs": 0,
+      "Hits": 0,
+      "Errors": 0,
+      "runbyinn": []
+    }
+  ],
 
-// REPLACED JSON CALL w/ith IMBEDDED ARRAY FOR EASE OF MANIPULATION & USE
+  "hometeam": [
+    {
+      "Runs": 0,
+      "Hits": 0,
+      "Errors": 0,
+      "runbyinn": []
+    }
+  ]
+}
+
+// TEAMS/PLAYERS/DETAILS REPLACED JSON CALL w/ith IMBEDDED ARRAY FOR EASE OF MANIPULATION & USE
 const myArray = {
   "Dodgers": [
     {
@@ -433,9 +453,10 @@ const myArray = {
 
 
 // section ONE - initialize variables;
-let resultcard = "";
 let curPitcher = "";
 let curHitter = "";
+let curPitName = "";
+let curHitName = "";
 let firstbase = 0;
 let secondbase = 0;
 let thirdbase = 0;
@@ -443,7 +464,7 @@ let inningout = 0;
 let arrayScorecard = [];
 let inning = 0;
 let innhits = 0;
-let innruns=0;
+let innruns = 0;
 let hits = 0;
 let errors = 0;
 let runs = 0;
@@ -452,16 +473,12 @@ let vttlHits = 0;
 let httlRuns = 0;
 let httlHits = 0;
 let dBases = ' <br> <img src="../images/bases000.jpg" width="80%"  >';
-let testinn = 0;
-let blah2 = "";
+let chgInnDesc = "";
 let trackLineupV = 0;
 let trackLineupH = 0;
 let visitorUp = true;
-let bName = "";
 let visInnsDesc = "";
-let vinnScore = [];
-let vendofInning = false;
-let hendofInning = false;
+let homeInnsDesc = "";
 let messages = document.getElementById("messages");
 let messages2 = document.getElementById("messages2");
 let messages3 = document.getElementById("messages3");
@@ -492,28 +509,17 @@ const inningdesc = [
 
 //Click Listener
 button1.addEventListener("click", playBall)
+button0.addEventListener("click", resetGame)
 
 //SECTION ZERO - removed (JSON CALL) - switched to using an array above
 
 //SECTION ONE - Roll the dice to determine  card to use (Pitcher or Batter) AND Results from card chosen
 function playBall() {
-  let k = Math.floor(Math.random() * 2); //determines card to use (pitcher or hitter)
-  let i = Math.floor(Math.random() * 6.5) + Math.floor(Math.random() * 6); //determines which item on selected card
+  const k = Math.floor(Math.random() * 2); //determines card to use (pitcher or hitter)
+  const i = Math.floor(Math.random() * 6.5) + Math.floor(Math.random() * 6); //determines which item on selected card
 
   //write to console
   console.log(`die detail: ${i}  die card: ${k}`);
-
-  /*
-  if (visitorUp) {
-    console.log("Visitor is up");
-    console.log("Pitch card (G)", myArray.Giants[9].pitop[i]);
-    console.log("Hitr  card (D) ", bName, myArray.Dodgers[trackLineupV].hitop[i]);
-  } else {
-    console.log("Home is up");
-    console.log("Pitch card (D)", myArray.Dodgers[9].pitop[i]);
-    console.log("Hitr  card (G) ", bName, myArray.Giants[trackLineupV].hitop[i]);
-  }
-  */
 
   //based on dice and player card - THEN determines result (hit/out)
   switch (k) {
@@ -547,6 +553,16 @@ function playBall() {
   messages2.id = "scrollbox";
   messages2.appendChild(newMessage2);
 
+  //draw HEADLINE to inform user of RESULTS boldly
+  let newAlert = document.getElementById("theadline");
+  const newHeadline = document.createElement("div");
+  const oldHeadline = document.getElementById("headline");
+  oldHeadline.remove();
+  newHeadline.id = "headline";
+  newHeadline.className = "headline";
+  newHeadline.innerHTML = `<b> ${bases2} </b>`;
+  newAlert.appendChild(newHeadline);
+
 
   //SECTION TWOb - increment batter - after EVERYTHING IS WRITTEN TO SCREEN (moves thru lineup)
   if (visitorUp) {
@@ -555,29 +571,28 @@ function playBall() {
     if (trackLineupV === 9) {
       trackLineupV = 0;
     }
-    bName = myArray.Dodgers[trackLineupV].Name;
     curPitcher = myArray.Giants[9];
     curHitter = myArray.Dodgers[trackLineupV];
+    curHitName = myArray.Dodgers[trackLineupV].Name;
   } else {
     console.log("home is up", trackLineupH);
     trackLineupH = trackLineupH + 1;
     curPitcher = myArray.Dodgers[9];
     curHitter = myArray.Giants[trackLineupH];
+    curHitName = myArray.Giants[trackLineupV].Name;
     if (trackLineupH === 9) {
       trackLineupH = 0;
 
     }
   }
   drawBatter(curPitcher, curHitter)
-
 };
 
 
 
 //SECTION THREE- FUNCTION - Calculates bases, runs, hits, based on BATTER/PITCHER/DICE and current status of Baserunners (had to keep here because of JSON data availability)
 function calcBases(bases) {
-
-  let bill = "zero";
+  let abResultDesc = "";
   let singstat = "";
   switch (bases) {
     case "4": //homerun
@@ -586,9 +601,8 @@ function calcBases(bases) {
       secondbase = 0;
       firstbase = 0;
       console.log(`'Homerun' bases are clear. ${runs} runs score.`);
-      bill = "cleared the bases";
+      abResultDesc = `Its a Homerun!!!! ${curHitName} has cleared the bases`;
       hits = 1;
-      // incrScore(visitorUp);
       dBases = ' <br> <img src="../images/bases000.jpg" width="80%"  >';
       break;
     case "3": //triple
@@ -597,10 +611,8 @@ function calcBases(bases) {
       secondbase = 0;
       firstbase = 0;
       console.log(`'triple' 3rd base only.  ${runs} runs score.`);
-      bill = "runner on third";
+      abResultDesc = `TRIPLE! ${curHitName} got ahold of that one!`;
       hits = 1;
-      //incrScore(visitorUp);
-
       dBases = ' <br> <img src="../images/bases001.jpg" width="80%"  >';
       break;
     case "2": //double
@@ -613,10 +625,8 @@ function calcBases(bases) {
       secondbase = 1;
       firstbase = 0;
       console.log(` Double!  ${runs} runs score.`);
-      bill = `runner on second ${thirdstat}`;
+      abResultDesc = `${curHitName} DOUBLES to the alley! ${thirdstat}`;
       hits = 1;
-      //incrScore(visitorUp);
-
       if (secondbase + thirdbase === 2) {
         dBases = ' <br> <img src="../images/bases011.jpg" width="80%"  >';
       } else {
@@ -636,10 +646,8 @@ function calcBases(bases) {
         singstat += " and third";
       }
       console.log(`'Single!  ${runs} runs score.`);
-      bill = `${singstat}`;
+      abResultDesc = `${curHitName} singles to left!  ${singstat}`;
       hits = 1;
-      // incrScore(visitorUp);
-
       if (firstbase + secondbase + thirdbase === 3) {
         dBases = ' <br> <img src="../images/bases111.jpg" width="80%"  >';
       } else {
@@ -661,39 +669,27 @@ function calcBases(bases) {
         secondbase = 0;
         thirdbase = 0;
         inningout = 0;
-       
-        //inning = chginntxt(inning);
+
+        //increment inning
         if (inning < 19) {
           arrayScorecard.push(inning);
           inning = ++inning;
         } else {
           inning = 0;
         }
- 
-
-
-
-        const blah = `${blah2} ${inningdesc[inning]}  ${runs} runs    ${innhits} hits     ${errors} errors `;
         visitorUp = !visitorUp;  // toggle who is up
         console.log(`xxEND 1/2 INN:${inning}    ${innruns}IR  ${vttlRuns}VR ${httlRuns}HR  ${innhits}IH   ${vttlHits}VH  ${httlHits}HH VisUp?: ${visitorUp}         `);
-
-
-
-
-
-
-        vendofInning = true;
-        hendofInning = true;
         if (inning % 2 === 0) {
-          blah2 = "End of";
+          chgInnDesc = "End of";
           visitorUp = true;
         } else {
-          blah2 = "Middle of ";
+          chgInnDesc = "Middle of ";
           visitorUp = false;
         }
 
+        //writing to message panel
         const newMessage3 = document.createElement("li");
-        const innstats = `${blah2} ${inningdesc[inning]}  ${innruns} runs    ${innhits} hits     ${errors} errors `;
+        const innstats = `${chgInnDesc} ${inningdesc[inning]}  ${innruns} runs    ${innhits} hits     ${errors} errors `;
         newMessage3.innerHTML = `${innstats}`;
         messages3.id = "scrollbox";
         messages3.appendChild(newMessage3);
@@ -704,26 +700,28 @@ function calcBases(bases) {
         messages.id = "scrollbox";
         messages.appendChild(newMessage);
 
-        console.log("hits and runs B4 zero out", hits, runs)
+        //update scoreboard array (line 794-ish)
+        if (!visitorUp) {
+          scoreByinn.visitors[0].runbyinn.push(innruns);
+        } else {
+          scoreByinn.hometeam[0].runbyinn.push(innruns);
+        }
+
+        //reset inning stats
         hits = 0;
         runs = 0;
-innhits=0;
-innruns=0;
+        innhits = 0;
+        innruns = 0;
         dBases = ' <br> <img src="../images/bases000.jpg" width="80%"  >';
-
       } else {
-
         inningout = ++inningout;
         singstat = `out # ${inningout}`;
       }
-
-
-
       showOuts(inningout);
       console.log(`'out' ${firstbase} ${secondbase} ${thirdbase},${singstat}`);
-      bill = `${singstat}`;
+      abResultDesc = `${singstat}`;
       runs = 0;
-      // bill = "out. no change on bases";
+      // abResultDesc = "out. no change on bases";
       break;
     default:
       console.log(`Sorry, something went wrong.`);
@@ -746,49 +744,36 @@ innruns=0;
   }
   drawBases(`${dBases}`);
 
-  //
-  function xxincrScore(whosup) {
-    switch (visitorUp) {
-      case true: //increment visitors score
-        vttlHits = vttlHits + 1;
-        vttlRuns = vttlRuns + runs;
-        break;
-      case false: //increment home score
-        httlHits = httlHits + 1;
-        httlRuns = httlRuns + runs;
-        break;
-      default:
-        console.log(`Sorry, something went wrong.`);
-
-    }        console.log(`ttl vis R: ${vttlRuns}   ttl home R: ${httlRuns} inn home R ${runs}`)
-
-  }
-
-
 
   //SECTION FOUR - REDRAW SCOREBOARD STUFF (innings, totals *************
-  // let visInnsDesc = ` <div class="top-left">`;
-  /*
-  let innArray = [1, 0, 1, 0, 1, 0, 1, 0, 0];
-  for (x = 0; x < 5; ++x) {
-    visInnsDesc += `${innArray[x]} &nbsp;`;
-  }
-  console.log("RUNS", runs);
-  console.log("VISINNDESC", visInnsDesc);
-  // visInnsDesc = ` ${runs} &nbsp;`;
-
-  console.log("GOT TO END OF INNING2 ", visInnsDesc)
   const drawVisInn = document.createElement("div");
   const oldVisInn = document.getElementById("visInn");
   oldVisInn.remove();
+  arrlen = scoreByinn.visitors[0].runbyinn.length;
+  for (x = 0; x < arrlen; ++x) {
+    visInnsDesc += `${scoreByinn.visitors[0].runbyinn[x]} &nbsp;`;
+  }
 
   drawVisInn.id = "visInn";
-  drawVisInn.innerHTML = `<div class="top-left"> ${visInnsDesc} </div>`;
-  console.log("DRAWVISINN", drawVisInn);
+  drawVisInn.innerHTML = `<div class="top-left"> ${visInnsDesc} &nbsp; &nbsp; </div>`;
   messages.appendChild(drawVisInn);
   visInnsDesc = "";
 
-  */
+  // let visInnsDesc = ` <div class="top-left">`;
+  const drawHomeInn = document.createElement("div");
+  const oldHomeInn = document.getElementById("homeInn");
+  oldHomeInn.remove();
+  arrlen = scoreByinn.hometeam[0].runbyinn.length;
+  for (x = 0; x < arrlen; ++x) {
+    homeInnsDesc += `${scoreByinn.hometeam[0].runbyinn[x]} &nbsp;`;
+  }
+
+  drawHomeInn.id = "homeInn";
+  drawHomeInn.innerHTML = `<div class="bottom-left"> ${homeInnsDesc} &nbsp; &nbsp; </div>`;
+  messages.appendChild(drawHomeInn);
+  homeInnsDesc = "";
+
+
   // REDRAW Visitors Total (RHE)
   let vscoreDesc = ` <div class="v_rhe">`;
   vscoreDesc += `${vttlRuns} &nbsp; ${vttlHits}  &nbsp; 0</div>`;
@@ -810,8 +795,7 @@ innruns=0;
   drawHomScore.innerHTML = hscoreDesc;
   messages.appendChild(drawHomScore);
   hscoreDesc = "";
-
-  return bill;
+  return abResultDesc;
 }
 
 //SECTION FIVE - REDRAW NEW BASES IMAGE (with latest results)
@@ -840,34 +824,17 @@ function showOuts(outs) {
   messages.appendChild(newOuts);
 }
 
-
-//SECTION SEVEN:  end of inning - make updates
-function chginntxt(inning) {
-  if (inning < 19) {
-    arrayScorecard.push(inning);
-    inning = ++inning;
-  } else {
-    inning = 0;
-  }
-  const blah = `${blah2} ${inningdesc[inning]}  ${runs} runs    ${hits} hits     ${errors} errors `;
-  visitorUp = !visitorUp;  // toggle who is up
-  console.log(`xxEND 1/2 INN:${inning}    ${runs}R   ${hits} H ${vttlRuns} VR  ${vttlHits} VH  VisUp?: ${visitorUp}       ${httlRuns} HR ${httlHits} HH `);
-
-
-  return inning;
-}
-
+//SECTION SIX - DRAW MATCHUP (Batter/Pitcher images and text)
 function drawBatter() {
-  // console.log("CURPIT", curPitcher,"CURHIT", curHitter);
+ 
   let Pit_Img = document.getElementById("matchbox");
   const newPit = document.createElement("div");
   const oldPit = document.getElementById("matchup1");
   oldPit.remove();
   newPit.id = "matchup1";
-  //newPit.innerHTML = `${myArray.Dodgers[9].Image}`;
   newPit.innerHTML = `${curPitcher.Image}`;
   Pit_Img.appendChild(newPit);
-
+ 
   let tempVal1 = `<table style="padding-top: 0%;"> <tr> <b style="font-size: 30px" ;>PITCHER</b> <BR> </tr> <tr> <b>NAME:</b> ${curPitcher.Name} <BR> </tr> <tr> <B> Pitcher Type:</B> ${curPitcher.Hit_Rating}<BR> </tr> <tr> <b>TODAY:</b> 5 Strike Outs / 2 Homeruns <BR> </tr> </table> </div>`
   let pitTxt = document.getElementById("matchtxt0");
   const newPtext = document.createElement("div");
@@ -886,7 +853,7 @@ function drawBatter() {
   newHtr.className = "matchimg";
   newHtr.innerHTML = `${curHitter.Image}`;
   htr_Img.appendChild(newHtr);
-
+ 
   let tempVal2 = `<table style="padding-bottom: 0%;"> <tr> <BR> <b style="font-size: 30px" ;>HITTER</b> <BR> </tr> <tr> <b>NAME:</b> ${curHitter.Name} <BR> </tr> <tr> <B> Hitter Type:</B> ${curHitter.Hit_Rating}<BR> </tr> <tr> <b>TODAY: </b>  2 - 4 (HR, Triple) <BR> </tr> </table> </div>`
   let hitTxt = document.getElementById("matchtxt0");
   const newHtext = document.createElement("div");
@@ -897,5 +864,41 @@ function drawBatter() {
   newHtext.innerHTML = `${tempVal2}`;
   hitTxt.appendChild(newHtext);
 
-
 }
+
+
+function resetGame() {
+scoreByinn.visitors[0].runbyinn.length = 0;
+scoreByinn.hometeam[0].runbyinn.length = 0;
+console.log("RESET");
+let curPitcher = "";
+let curHitter = "";
+let curPitName = "";
+let curHitName = "";
+let firstbase = 0;
+let secondbase = 0;
+let thirdbase = 0;
+let inningout = 0;
+let arrayScorecard = [];
+let inning = 0;
+let innhits = 0;
+let innruns = 0;
+let hits = 0;
+let errors = 0;
+let runs = 0;
+let vttlRuns = 0;
+let vttlHits = 0;
+let httlRuns = 0;
+let httlHits = 0;
+let dBases = ' <br> <img src="../images/bases000.jpg" width="80%"  >';
+let chgInnDesc = "";
+let trackLineupV = 0;
+let trackLineupH = 0;
+let visitorUp = true;
+let visInnsDesc = "";
+let homeInnsDesc = "";
+drawBases();
+showOuts(0);
+
+};
+

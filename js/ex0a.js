@@ -1,7 +1,33 @@
 console.log("BACKUP of ex0 - this is Oa")
-console.log(" functions & baseball - dice probability (ex0)");
 
-// REPLACED JSON CALL w/ith IMBEDDED ARRAY FOR EASE OF MANIPULATION & USE
+
+console.log(" functions & baseball - dice probability (ex0)");
+// array for scoreboard tracking and drawing
+const scoreByinn =  {
+  "visitors": [
+      {
+      "Runs": 0,
+      "Hits": 0,
+      "Errors":0,
+      "runbyinn": [  ]
+  }
+],
+
+  "hometeam": [
+      {
+      "Runs": 0,
+      "Hits": 0,
+      "Errors":0,
+      "runbyinn": [ ]
+      }
+  ]
+}
+
+
+
+
+
+// TEAMS/PLAYERS/DETAILS REPLACED JSON CALL w/ith IMBEDDED ARRAY FOR EASE OF MANIPULATION & USE
 const myArray = {
   "Dodgers": [
     {
@@ -433,13 +459,19 @@ const myArray = {
 
 
 // section ONE - initialize variables;
-let resultcard = "";
+
+let curPitcher = "";
+let curHitter = "";
+let curPitName = "";
+let curHitName = "";
 let firstbase = 0;
 let secondbase = 0;
 let thirdbase = 0;
 let inningout = 0;
 let arrayScorecard = [];
 let inning = 0;
+let innhits = 0;
+let innruns = 0;
 let hits = 0;
 let errors = 0;
 let runs = 0;
@@ -447,17 +479,13 @@ let vttlRuns = 0;
 let vttlHits = 0;
 let httlRuns = 0;
 let httlHits = 0;
-let dBases = ' <br> <img src="../images/bases000.jpg"  >';
-let testinn = 0;
-let blah2 = "";
+let dBases = ' <br> <img src="../images/bases000.jpg" width="80%"  >';
+let chgInnDesc = "";
 let trackLineupV = 0;
 let trackLineupH = 0;
 let visitorUp = true;
-let bName = "";
 let visInnsDesc = "";
-let vinnScore = [];
-let vendofInning = false;
-let hendofInning = false;
+let homeInnsDesc = "";
 let messages = document.getElementById("messages");
 let messages2 = document.getElementById("messages2");
 let messages3 = document.getElementById("messages3");
@@ -493,20 +521,11 @@ button1.addEventListener("click", playBall)
 
 //SECTION ONE - Roll the dice to determine  card to use (Pitcher or Batter) AND Results from card chosen
 function playBall() {
-  let k = Math.floor(Math.random() * 2); //determines card to use (pitcher or hitter)
-  let i = Math.floor(Math.random() * 6.5) + Math.floor(Math.random() * 6); //determines which item on selected card
+  const k = Math.floor(Math.random() * 2); //determines card to use (pitcher or hitter)
+  const i = Math.floor(Math.random() * 6.5) + Math.floor(Math.random() * 6); //determines which item on selected card
 
   //write to console
   console.log(`die detail: ${i}  die card: ${k}`);
-  if (visitorUp) {
-    console.log("Visitor is up");
-    console.log("Pitch card (G)", myArray.Giants[9].pitop[i]);
-    console.log("Hitr  card (D) ", bName, myArray.Dodgers[trackLineupV].hitop[i]);
-  } else {
-    console.log("Home is up");
-    console.log("Pitch card (D)", myArray.Dodgers[9].pitop[i]);
-    console.log("Hitr  card (G) ", bName, myArray.Giants[trackLineupV].hitop[i]);
-  }
 
   //based on dice and player card - THEN determines result (hit/out)
   switch (k) {
@@ -540,6 +559,16 @@ function playBall() {
   messages2.id = "scrollbox";
   messages2.appendChild(newMessage2);
 
+  //draw HEADLINE to inform user of RESULTS boldly
+  let newAlert = document.getElementById("theadline");
+  const newHeadline = document.createElement("div");
+  const oldHeadline = document.getElementById("headline");
+  oldHeadline.remove();
+  newHeadline.id = "headline";
+  newHeadline.className = "headline";
+  newHeadline.innerHTML = `<b> ${bases2} </b>`;
+  newAlert.appendChild(newHeadline);
+
 
   //SECTION TWOb - increment batter - after EVERYTHING IS WRITTEN TO SCREEN (moves thru lineup)
   if (visitorUp) {
@@ -548,17 +577,22 @@ function playBall() {
     if (trackLineupV === 9) {
       trackLineupV = 0;
     }
-    console.log("bname", trackLineupV, bName);
-    bName = myArray.Dodgers[trackLineupV].Name;
+
+    curPitcher = myArray.Giants[9];
+    curHitter = myArray.Dodgers[trackLineupV];
+    curHitName = myArray.Dodgers[trackLineupV].Name;
   } else {
     console.log("home is up", trackLineupH);
     trackLineupH = trackLineupH + 1;
+    curPitcher = myArray.Dodgers[9];
+    curHitter = myArray.Giants[trackLineupH];
+    curHitName = myArray.Giants[trackLineupV].Name;
     if (trackLineupH === 9) {
       trackLineupH = 0;
-      console.log("bname", trackLineupH, bName);
+
     }
   }
-
+  drawBatter(curPitcher, curHitter)
 
 };
 
@@ -566,6 +600,7 @@ function playBall() {
 
 //SECTION THREE- FUNCTION - Calculates bases, runs, hits, based on BATTER/PITCHER/DICE and current status of Baserunners (had to keep here because of JSON data availability)
 function calcBases(bases) {
+
   let bill = "zero";
   let singstat = "";
   switch (bases) {
@@ -575,11 +610,10 @@ function calcBases(bases) {
       secondbase = 0;
       firstbase = 0;
       console.log(`'Homerun' bases are clear. ${runs} runs score.`);
-      bill = "cleared the bases";
-      incrScore(visitorUp);
-      //  ttlHits = ttlHits + 1;
-      // ttlRuns = ttlRuns + runs;
-      dBases = ' <br> <img src="../images/bases000.jpg"  >';
+      bill = `Its a Homerun!!!! ${curHitName} has cleared the bases`;
+      hits = 1;
+      // incrScore(visitorUp);
+      dBases = ' <br> <img src="../images/bases000.jpg" width="80%"  >';
       break;
     case "3": //triple
       runs = thirdbase + secondbase + firstbase;
@@ -587,10 +621,11 @@ function calcBases(bases) {
       secondbase = 0;
       firstbase = 0;
       console.log(`'triple' 3rd base only.  ${runs} runs score.`);
-      bill = "runner on third";
-      incrScore(visitorUp);
+      bill = `TRIPLE! ${curHitName} got ahold of that one!`;
+      hits = 1;
+      //incrScore(visitorUp);
 
-      dBases = ' <br> <img src="../images/bases001.jpg"  >';
+      dBases = ' <br> <img src="../images/bases001.jpg" width="80%"  >';
       break;
     case "2": //double
       runs = thirdbase + secondbase;
@@ -602,13 +637,14 @@ function calcBases(bases) {
       secondbase = 1;
       firstbase = 0;
       console.log(` Double!  ${runs} runs score.`);
-      bill = `runner on second ${thirdstat}`;
-      incrScore(visitorUp);
+      bill = `${curHitName} DOUBLES to the alley! ${thirdstat}`;
+      hits = 1;
+      //incrScore(visitorUp);
 
       if (secondbase + thirdbase === 2) {
-        dBases = ' <br> <img src="../images/bases011.jpg"  >';
+        dBases = ' <br> <img src="../images/bases011.jpg" width="80%"  >';
       } else {
-        dBases = ' <br> <img src="../images/bases010.jpg"  >';
+        dBases = ' <br> <img src="../images/bases010.jpg" width="80%"  >';
       }
       break;
     case "1": //single
@@ -624,41 +660,55 @@ function calcBases(bases) {
         singstat += " and third";
       }
       console.log(`'Single!  ${runs} runs score.`);
-      bill = `${singstat}`;
-      incrScore(visitorUp);
+      bill = `${curHitName} singles to left!  ${singstat}`;
+      hits = 1;
+      // incrScore(visitorUp);
 
       if (firstbase + secondbase + thirdbase === 3) {
-        dBases = ' <br> <img src="../images/bases111.jpg"  >';
+        dBases = ' <br> <img src="../images/bases111.jpg" width="80%"  >';
       } else {
         if (firstbase + secondbase === 2)
-          dBases = ' <br> <img src="../images/bases110.jpg"  >';
+          dBases = ' <br> <img src="../images/bases110.jpg" width="80%"  >';
         else {
-          dBases = ' <br> <img src="../images/bases101.jpg"  >';
+          dBases = ' <br> <img src="../images/bases101.jpg" width="80%"  >';
         }
       }
       if (firstbase + secondbase + thirdbase === 1) {
-        dBases = ' <br> <img src="../images/bases100.jpg"  >';
+        dBases = ' <br> <img src="../images/bases100.jpg" width="80%"  >';
       }
       break;
     case "0": // out
+      hits = 0;
       if (inningout === 2) {
         singstat += "half inning over";
         firstbase = 0;
         secondbase = 0;
         thirdbase = 0;
         inningout = 0;
-        inning = chginntxt(inning);
-        vendofInning = true;
-        hendofInning = true;
+
+        //inning = chginntxt(inning);
+        if (inning < 19) {
+          arrayScorecard.push(inning);
+          inning = ++inning;
+        } else {
+          inning = 0;
+        }
+
+        const blah = `${chgInnDesc} ${inningdesc[inning]}  ${runs} runs    ${innhits} hits     ${errors} errors `;
+        visitorUp = !visitorUp;  // toggle who is up
+        console.log(`xxEND 1/2 INN:${inning}    ${innruns}IR  ${vttlRuns}VR ${httlRuns}HR  ${innhits}IH   ${vttlHits}VH  ${httlHits}HH VisUp?: ${visitorUp}         `);
+
+
         if (inning % 2 === 0) {
-          blah2 = "End of";
+          chgInnDesc = "End of";
           visitorUp = true;
         } else {
-          blah2 = "Middle of ";
+          chgInnDesc = "Middle of ";
           visitorUp = false;
         }
+
         const newMessage3 = document.createElement("li");
-        const innstats = `${blah2} ${inningdesc[inning]}  ${runs} runs    ${hits} hits     ${errors} errors `;
+        const innstats = `${chgInnDesc} ${inningdesc[inning]}  ${innruns} runs    ${innhits} hits     ${errors} errors `;
         newMessage3.innerHTML = `${innstats}`;
         messages3.id = "scrollbox";
         messages3.appendChild(newMessage3);
@@ -669,16 +719,33 @@ function calcBases(bases) {
         messages.id = "scrollbox";
         messages.appendChild(newMessage);
 
+        //update scoreboard array (line 794-ish)
+        if (!visitorUp) {
+        scoreByinn.visitors[0].runbyinn.push(innruns);
+
+        console.log ("Visitor line", scoreByinn.visitors[0].runbyinn   );
+        console.log ("Home line", scoreByinn.hometeam[0].runbyinn   );
+        } else { 
+        scoreByinn.hometeam[0].runbyinn.push(innruns);
+        console.log ("Visitor line", scoreByinn.visitors[0].runbyinn   );
+        console.log ("Home line", scoreByinn.hometeam[0].runbyinn   );
+        }
+ 
+
+
+
         hits = 0;
         runs = 0;
-
-        dBases = ' <br> <img src="../images/bases000.jpg"  >';
+        innhits = 0;
+        innruns = 0;
+        dBases = ' <br> <img src="../images/bases000.jpg" width="80%"  >';
 
       } else {
 
         inningout = ++inningout;
         singstat = `out # ${inningout}`;
       }
+
       showOuts(inningout);
       console.log(`'out' ${firstbase} ${secondbase} ${thirdbase},${singstat}`);
       bill = `${singstat}`;
@@ -688,11 +755,26 @@ function calcBases(bases) {
     default:
       console.log(`Sorry, something went wrong.`);
   }
+  innhits = innhits + hits;
+  innruns = innruns + runs;
+  switch (visitorUp) {
+    case true: //increment visitors score
+      vttlHits = vttlHits + hits;
+      vttlRuns = vttlRuns + runs;
 
+      break;
+    case false: //increment home score
+      httlHits = httlHits + hits;
+      httlRuns = httlRuns + runs;
+      break;
+    default:
+      console.log(`Sorry, something went wrong.`);
+
+  }
   drawBases(`${dBases}`);
 
   //
-  function incrScore(whosup) {
+  function xxincrScore(whosup) {
     switch (visitorUp) {
       case true: //increment visitors score
         vttlHits = vttlHits + 1;
@@ -704,35 +786,55 @@ function calcBases(bases) {
         break;
       default:
         console.log(`Sorry, something went wrong.`);
-        console.log(`visitor runs: ${vttlRuns}   home runs: ${httlRuns}`)
-    }
+
+    }        console.log(`ttl vis R: ${vttlRuns}   ttl home R: ${httlRuns} inn home R ${runs}`)
+
   }
 
 
 
   //SECTION FOUR - REDRAW SCOREBOARD STUFF (innings, totals *************
   // let visInnsDesc = ` <div class="top-left">`;
-  let innArray = [1, 0, 1, 0, 1, 0, 1, 0, 0];
-  for (x = 0; x < 5; ++x) {
-    visInnsDesc += `${innArray[x]} &nbsp;`;
-  }
-  console.log("RUNS", runs);
-  console.log("VISINNDESC", visInnsDesc);
-  // visInnsDesc = ` ${runs} &nbsp;`;
-
-  console.log("GOT TO END OF INNING2 ", visInnsDesc)
+ 
   const drawVisInn = document.createElement("div");
   const oldVisInn = document.getElementById("visInn");
   oldVisInn.remove();
 
+  arrlen = scoreByinn.visitors[0].runbyinn.length;
+for (x=0; x<arrlen; ++x){
+ 
+  visInnsDesc += `${scoreByinn.visitors[0].runbyinn[x]} &nbsp;`;
+}
+console.log("visInnsDesc",visInnsDesc);
+
+
   drawVisInn.id = "visInn";
-  drawVisInn.innerHTML = `<div class="top-left"> ${visInnsDesc} </div>`;
-  console.log("DRAWVISINN", drawVisInn);
+  drawVisInn.innerHTML = `<div class="top-left"> ${visInnsDesc} &nbsp; &nbsp; </div>`;
+console.log("DRAWVISINN", drawVisInn);
   messages.appendChild(drawVisInn);
   visInnsDesc = "";
 
+  // let visInnsDesc = ` <div class="top-left">`;
+  const drawHomeInn = document.createElement("div");
+  const oldHomeInn = document.getElementById("homeInn");
+  oldHomeInn.remove();
+
+  arrlen = scoreByinn.hometeam[0].runbyinn.length;
+for (x=0; x<arrlen; ++x){
+  homeInnsDesc += `${scoreByinn.hometeam[0].runbyinn[x]} &nbsp;`;
+}
+console.log("homeInnsDesc",homeInnsDesc);
+
+
+  drawHomeInn.id = "homeInn";
+  drawHomeInn.innerHTML = `<div class="bottom-left"> ${homeInnsDesc} &nbsp; &nbsp; </div>`;
+ 
+  messages.appendChild(drawHomeInn);
+  homeInnsDesc = "";
+
+   
   // REDRAW Visitors Total (RHE)
-  let vscoreDesc = ` <div class="top-right">`;
+  let vscoreDesc = ` <div class="v_rhe">`;
   vscoreDesc += `${vttlRuns} &nbsp; ${vttlHits}  &nbsp; 0</div>`;
   const drawVisScore = document.createElement("div");
   const oldVisScore = document.getElementById("divInn3");
@@ -763,13 +865,14 @@ function drawBases(bases) {
   const oldBases = document.getElementById("diamond");
   oldBases.remove();
   newBases.id = "diamond";
+  newBases.className = "field";
   newBases.innerHTML = bases;
   bbdiamond.appendChild(newBases);
 }
 
 //SECTION SIX - DRAW OUTS RED CIRCLES (based on latest results)
 function showOuts(outs) {
-  console.log("outs:", outs)
+  //console.log("outs:", outs)
   let voutsDesc = ` <div class="circle" <p> &#9679; </p> </div> `;
   if (outs === 2) { voutsDesc = ` <div class="circle" <p> &#9679; &#9679 </p> </div> `; };
   if (outs === 0) { voutsDesc = ` <div class="circle"  </div> `; }
@@ -790,15 +893,53 @@ function chginntxt(inning) {
   } else {
     inning = 0;
   }
-  const blah = `${blah2} ${inningdesc[inning]}  ${runs} runs    ${hits} hits     ${errors} errors `;
+  const blah = `${chgInnDesc} ${inningdesc[inning]}  ${runs} runs    ${hits} hits     ${errors} errors `;
   visitorUp = !visitorUp;  // toggle who is up
-  console.log(
-    `xxEND OF 1/2 INNING:${inning}    ${runs} RUNS  ${vttlRuns} VISruns   ${hits} HITS   ${errors} ERRORS  ${vttlHits} VIS TTLHITS     Visitors Up: ${visitorUp}`
-  );
-  console.log(
-    `xxEND OF 1/2 INNING:${inning}    ${runs} RUNS  ${httlRuns} HOMEruns   ${hits} HITS   ${errors} ERRORS  ${httlHits} HOM TTLHITS     Visitors Up: ${visitorUp}`
-  );
+  console.log(`xxEND 1/2 INN:${inning}    ${runs}R   ${hits} H ${vttlRuns} VR  ${vttlHits} VH  VisUp?: ${visitorUp}       ${httlRuns} HR ${httlHits} HH `);
+
+
   return inning;
 }
 
+function drawBatter() {
+  // console.log("CURPIT", curPitcher,"CURHIT", curHitter);
+  let Pit_Img = document.getElementById("matchbox");
+  const newPit = document.createElement("div");
+  const oldPit = document.getElementById("matchup1");
+  oldPit.remove();
+  newPit.id = "matchup1";
+  //newPit.innerHTML = `${myArray.Dodgers[9].Image}`;
+  newPit.innerHTML = `${curPitcher.Image}`;
+  Pit_Img.appendChild(newPit);
 
+  let tempVal1 = `<table style="padding-top: 0%;"> <tr> <b style="font-size: 30px" ;>PITCHER</b> <BR> </tr> <tr> <b>NAME:</b> ${curPitcher.Name} <BR> </tr> <tr> <B> Pitcher Type:</B> ${curPitcher.Hit_Rating}<BR> </tr> <tr> <b>TODAY:</b> 5 Strike Outs / 2 Homeruns <BR> </tr> </table> </div>`
+  let pitTxt = document.getElementById("matchtxt0");
+  const newPtext = document.createElement("div");
+  const oldPtext = document.getElementById("matchtxt1");
+  oldPtext.remove();
+  newPtext.id = "matchtxt1";
+  newPtext.className = "matchtxt";
+  newPtext.innerHTML = `${tempVal1}`;
+  pitTxt.appendChild(newPtext);
+
+  let htr_Img = document.getElementById("matchbox");
+  const newHtr = document.createElement("div");
+  const oldHtr = document.getElementById("matchup2");
+  oldHtr.remove();
+  newHtr.id = "matchup2";
+  newHtr.className = "matchimg";
+  newHtr.innerHTML = `${curHitter.Image}`;
+  htr_Img.appendChild(newHtr);
+
+  let tempVal2 = `<table style="padding-bottom: 0%;"> <tr> <BR> <b style="font-size: 30px" ;>HITTER</b> <BR> </tr> <tr> <b>NAME:</b> ${curHitter.Name} <BR> </tr> <tr> <B> Hitter Type:</B> ${curHitter.Hit_Rating}<BR> </tr> <tr> <b>TODAY: </b>  2 - 4 (HR, Triple) <BR> </tr> </table> </div>`
+  let hitTxt = document.getElementById("matchtxt0");
+  const newHtext = document.createElement("div");
+  const oldHtext = document.getElementById("matchtxt2");
+  oldHtext.remove();
+  newHtext.id = "matchtxt2";
+  newHtext.className = "matchtxt";
+  newHtext.innerHTML = `${tempVal2}`;
+  hitTxt.appendChild(newHtext);
+
+
+}
