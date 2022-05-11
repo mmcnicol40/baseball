@@ -68,21 +68,21 @@
 .top-left {
   position: absolute;
   font-style: bold;
-  font-size: large;
+  font-size: 26px;
   color: white;
   font-weight: 900;
-  top: 9%;
-  left: 55%;
+  top: 134px;
+  left: 1117px;
 }
 
 .bottom-left {
   position: absolute;
   font-style: bold;
-  font-size: xx-large;
-  color: blue;
+  font-size: 26px;
+  color: white;
   font-weight: 900;
-  top: 240px;
-  left: 923px;
+  top: 168px;
+  left: 1117px;
 }
 
 .v_rhe {
@@ -108,7 +108,19 @@
 * {
   box-sizing: border-box;
 }
- 
+ /* Create three equal columns that floats next to each other */
+.headline {
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  height: 500px;
+  line-height: 35px;
+  padding-left: 10%;
+  font-size: 40px;
+  border-color: white;
+  border-width: 10px;
+}
+
 /* Create three equal columns that floats next to each other */
 .column {
   float: left;
@@ -120,10 +132,10 @@
 /* Clear floats after the columns  */
 .row{
   width: 1500px;
-  font-size: x-large;
-  color: black;
+  font-size: 20px;
+  color: white;
   line-height: normal;
-  background-color: aqua;
+  background-color: black;
   height: 500px;
 }
 
