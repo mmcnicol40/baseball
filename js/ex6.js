@@ -1,5 +1,5 @@
 console.log("reading JSON file - two diff poss solutions");
-//solution #1
+//Primary JSON solution #1
 let trackLineupV = 0;
 let trackLineupH = 0;
 let visitorUp=true;
@@ -16,7 +16,7 @@ async function getData2() {
 
 //listening for click then call "getData"
 button.addEventListener("click", async function () {
-  let username = textbox.value;
+ // let username = textbox.value;
   const myArray = await getData2();
   console.log("myArray", myArray);
   let bName = myArray.Dodgers[trackLineupV][0].Name;
@@ -44,6 +44,9 @@ if (visitorUp) {
   //return result;
 }
 );
+
+
+//ALTERNATIVE JSON APPROACH (#2)
 
 // this was ex7 (different approach to accessing JSON file - successful try #2)
 // solutions #2
