@@ -12,6 +12,12 @@
   width: 600px;
   height: 100px;
 }
+.msg1 {
+  overflow: scroll;
+  width: 600px;
+  height: 500px;
+}
+
 
 .myField {
   position: relative;
@@ -29,8 +35,8 @@
   font-size: 60px;
   color: red;
   font-weight: 1200;
-  top: 210px;
-  left: 1400px;
+  top: 226px;
+  left: 1390px;
 }
 
 
@@ -71,7 +77,7 @@
   font-size: 26px;
   color: white;
   font-weight: 900;
-  top: 134px;
+  top: 130px;
   left: 1117px;
 }
 
@@ -81,7 +87,7 @@
   font-size: 26px;
   color: white;
   font-weight: 900;
-  top: 168px;
+  top: 164px;
   left: 1117px;
 }
 
@@ -91,7 +97,7 @@
   font-size: 22px;
   color: white;
   font-weight: 900;
-  top: 137px;
+  top: 130px;
   left: 1420px;
 }
 
@@ -101,7 +107,7 @@
   font-size: 22px;
   color: white;
   font-weight: 900;
-  top: 172px;
+  top: 164px;
   left: 1420px;
 }
 
@@ -115,9 +121,8 @@
   padding: 10px;
   height: 500px;
   line-height: 35px;
-  padding-left: 10%;
+  padding-left: 0%;
   font-size: 40px;
-  border-color: white;
   border-width: 10px;
 }
 
@@ -154,4 +159,11 @@
 button {
   width: 80px;
   height: 40px;
+}
+menu {
+   font-size: 50px;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+     color: black;
+  line-height: 10px;
+background-color: blueviolet;   
 }
