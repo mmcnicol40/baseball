@@ -8,9 +8,62 @@
 </head>
 <body>
     <h1><a href="../index.html">Click on link to return to Start Page</a></h1>
-    <h2>Mitch's Exercise 5</h2>
-    <h3>View console to see JavaScript Output</h3>
+    <h2>Mitch's Ex  5</h2>
+    <h3>Test HTML - calling/passing data to gamestats (ex5 to ex8)</h3> 
+    
+    <BR>
+    <h1><a href="../html/ex8.html">Click on link to test ex8 variable passing</a></h1>
+  
+    <button onclick='window.location.href="../html/ex8.html"'>
+      InGame Stats
+    </button>
+<BR>
+      <button onclick="openTab('../html/ex8.html')">Boxscore (ex8.html)</button>
+  <script src="../js/ex5.js"></script> 
+ <!--
 
-    <script src="../js/ex5.js"></script>
+     
+<script>
+const gstatArray = {
+  "game": [
+    {
+      "Ttl PH Dice Roll's": 10,
+      "Ttl Pitcher's Card": 5,
+      "Ttl Hitter's Card": 5
+    }
+  ],
+  "Dodgers": [
+    {
+      "Name": "Mitch",
+      "atBats": 5,
+      "Hits": 2,
+      "HRs": 1
+    },
+    {
+      "Name": "Jimmy",
+      "atBats": 2,
+      "Hits": 1,
+      "HRs": 1
+    }
+  ],
+  "Giants": [
+    {
+      "Name": "Bill",
+      "atBats": 4,
+      "Hits": 1,
+      "HRs": 0
+    }
+  ]
+}
+
+     sessionStorage.setItem("gstatArray",JSON.stringify(gstatArray));  
+</script>
+     
+ -->
+ 
+
+ 
+       
+
 </body>
 </html>
